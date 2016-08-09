@@ -6,7 +6,7 @@ const employees =  [
         avatar: "/src/images/gabriella-boon.png",
         role:".NET Developer",
         team:"Modern Apps",
-        biography:"Gabriella Boon has been a .NET developer since 2011 having build various solutions using ASPNET as well as mobile development using Xamarin. With background mostly in server side development Gabriella is in her element when developing decoupled services and designing SQL database solutions.",
+        biography:"Gabriella Boon has been a .NET developer since 2011 having build various solutions using ASPNET as well as mobile development using Xamarin. With a background mostly in server side development Gabriella is in her element when developing decoupled services and designing SQL database solutions.",
         keySkills: [
             {
                 name:"ASP.NET MCV / WEBAPI"
