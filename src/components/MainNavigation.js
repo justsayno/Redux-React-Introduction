@@ -30,7 +30,7 @@ class MainNavigation extends Component{
             <nav>
                 <div className="nav-wrapper black">
                     <div className="container">
-                        <a href="#!" className="brand-logo">Employee CV Manager</a>
+                        <a href="/" className="brand-logo">Employee CV Manager</a>
                         <a onClick={() => this.toggleSideNav()} className="button-collapse">
                             <i className="material-icons">menu</i>
                         </a>
