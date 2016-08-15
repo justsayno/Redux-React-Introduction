@@ -2,7 +2,7 @@ import { createStore } from 'redux'
 import { getEmployees } from './api/employees'
 
 const initialState = {
-    employees: []
+    employees: getEmployees()
 }
 
 // actions
@@ -20,7 +20,7 @@ export const employeesReducer = (state = initialState, action) => {
     switch(action.type){
         case REQUEST_EMPLOYEES: {
             const employees = getEmployees()
-            Object.assign({}, state, {
+            return Object.assign({}, state, {
                 employees: employees
             })
         }
