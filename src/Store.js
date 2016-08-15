@@ -1,8 +1,7 @@
 import { createStore } from 'redux'
-import { getEmployees } from './api/employees'
 
 const initialState = {
-    employees: getEmployees()
+    employees: []
 }
 
 const employeeReducer = (state = initialState, action) => {
