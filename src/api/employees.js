@@ -1,4 +1,4 @@
-const getEmployees = () => { 
+export const getEmployees = () => { 
     return [{
     id: "2813a9b5-d5d0-4b3a-a7bb-a7f275516b1d",
     firstName: "Gabriella",
@@ -147,6 +147,7 @@ const getEmployees = () => {
         }],
     }]
 }
+
 export const getEmployee = (employeeId) => {
     let employee
     employee = employees.filter((value) => {
@@ -154,5 +155,3 @@ export const getEmployee = (employeeId) => {
     })[0]
     return employee
 }
-
-export default employees
