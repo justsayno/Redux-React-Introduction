@@ -1,16 +1,9 @@
-import React, { Component } from 'react'
-import { getEmployee } from '../api/employees'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
 class EmployeeProfile extends Component {
-    constructor({params}){
-        super()
-        const employee = getEmployee(params.employeeId)
-        this.state = {
-            employee: employee
-        }
-    }
     render(){
-        const { employee: { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } } = this.state
+        const { employee: { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } } = this.props
         return (
             <div>
                 <div className="col s12 m4">
@@ -58,4 +51,13 @@ class EmployeeProfile extends Component {
     }
 }
 
-export default EmployeeProfile
+
+EmployeeProfile.propTypes = {
+    employee: PropTypes.array.isRequired
+}
+
+const mapStateToProps = (state) => ({ 
+    employees: state.employees
+})
+
+export default connect(mapStateToProps, null)(EmployeeProfile)
