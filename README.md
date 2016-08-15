@@ -23,13 +23,13 @@ cd react-introduction
 npm install
 ```
 
-To run the **static html version** I am starting with:
+To run the **static html version**::
 
 ```
 npm run static
 ```
 
-To run the React Javascript app:
+To run the **React Javascript app**:
 
 ```
 npm run start
