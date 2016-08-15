@@ -150,7 +150,7 @@ export const getEmployees = () => {
 
 export const getEmployee = (employeeId) => {
     let employee
-    employee = employees.filter((value) => {
+    employee = getEmployees().filter((value) => {
         return value && (value.id === employeeId)
     })[0]
     return employee
