@@ -3,7 +3,14 @@ import { connect } from 'react-redux'
 
 class EmployeeProfile extends Component {
     render(){
-        const { employee: { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } } = this.props
+        // get employee and employee id from props
+        const { employees, params: { employeeId } } = this.props
+        // filter employees for the one that is selected
+        const employee = employees.filter((value) => {
+            return value && (value.id === employeeId)
+        })[0]
+        // deconstruct the employee object for easier rendering
+        const { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } = employee
         return (
             <div>
                 <div className="col s12 m4">
@@ -27,7 +34,7 @@ class EmployeeProfile extends Component {
                                 <h5 className="profile-name">Key Skills and Technologies</h5>
                                 <ul className="collection">
                                     {keySkills.map((skill) => (
-                                        <li className="collection-item">{skill.name}</li>
+                                        <li key={skill.name} className="collection-item">{skill.name}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -42,7 +49,7 @@ class EmployeeProfile extends Component {
                 <h5>Recent Projects</h5>
                 <ul className="collection">
                     {recentProjects.map((project) => (
-                        <li className="collection-item">{project.name}</li>
+                        <li key={project.name} className="collection-item">{project.name}</li>
                     ))}
                 </ul>
             </div>
@@ -53,7 +60,21 @@ class EmployeeProfile extends Component {
 
 
 EmployeeProfile.propTypes = {
-    employee: PropTypes.array.isRequired
+    employees: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        avatar: PropTypes.string.isRequired,
+        role: PropTypes.string.isRequired,
+        team: PropTypes.string.isRequired,
+        biography: PropTypes.string.isRequired,
+        keySkills: PropTypes.arrayOf(React.PropTypes.shape({
+            name: PropTypes.string.isRequired
+        })),
+        recentProjects: PropTypes.arrayOf(React.PropTypes.shape({
+            name: PropTypes.string.isRequired
+        }))
+    })).isRequired
 }
 
 const mapStateToProps = (state) => ({ 
