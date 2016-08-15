@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+// PropTypes
+import { Employee } from '../constants/PropTypes'
+
 // Components
 import EmployeeList from '../components/EmployeeList'
 import EmployeeListItem from '../components/EmployeeListItem'
@@ -21,7 +24,7 @@ class EmployeeDashboard extends Component {
 }
 
 EmployeeDashboard.propTypes = {
-    employees: PropTypes.array.isRequired
+    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired
 }
 
 const mapStateToProps = (state) => ({ 

@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+// PropTypes
+import { Employee } from '../constants/PropTypes'
+
 class EmployeeProfile extends Component {
     render(){
         // get employee and employee id from props
@@ -60,21 +63,7 @@ class EmployeeProfile extends Component {
 
 
 EmployeeProfile.propTypes = {
-    employees: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        avatar: PropTypes.string.isRequired,
-        role: PropTypes.string.isRequired,
-        team: PropTypes.string.isRequired,
-        biography: PropTypes.string.isRequired,
-        keySkills: PropTypes.arrayOf(React.PropTypes.shape({
-            name: PropTypes.string.isRequired
-        })),
-        recentProjects: PropTypes.arrayOf(React.PropTypes.shape({
-            name: PropTypes.string.isRequired
-        }))
-    })).isRequired
+    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired
 }
 
 const mapStateToProps = (state) => ({ 
