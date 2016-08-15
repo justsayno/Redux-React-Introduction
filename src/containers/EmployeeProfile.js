@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
-import { getEmployee } from '../api/employees'
+import { getEmployeeById } from '../api/employees'
 
 class EmployeeProfile extends Component {
     constructor({params}){
         super()
-        const employee = getEmployee(params.employeeId)
+        const employee = getEmployeeById(params.employeeId)
         this.state = {
             employee: employee
         }
     }
     render(){
         const { employee: { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } } = this.state
-        debugger
         return (
             <div>
                 <div className="col s12 m4">
@@ -35,7 +34,7 @@ class EmployeeProfile extends Component {
                                 <h5 className="profile-name">Key Skills and Technologies</h5>
                                 <ul className="collection">
                                     {keySkills.map((skill) => (
-                                        <li className="collection-item">{skill.name}</li>
+                                        <li key={skill.name} className="collection-item">{skill.name}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -50,7 +49,7 @@ class EmployeeProfile extends Component {
                 <h5>Recent Projects</h5>
                 <ul className="collection">
                     {recentProjects.map((project) => (
-                        <li className="collection-item">{project.name}</li>
+                        <li key={project.name} className="collection-item">{project.name}</li>
                     ))}
                 </ul>
             </div>
