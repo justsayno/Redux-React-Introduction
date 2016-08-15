@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 // Components
@@ -18,6 +18,10 @@ class EmployeeDashboard extends Component {
       </div>
     )
   }
+}
+
+EmployeeDashboard.propTypes = {
+    employees: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state) => ({ 
