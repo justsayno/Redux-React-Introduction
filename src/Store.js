@@ -1,6 +1,11 @@
 import { createStore } from 'redux'
+import { getEmployees } from './api/employees'
 
-const employeeReducer = (state = {}, action) => {
+const initialState = {
+    employees = getEmployees()
+}
+
+const employeeReducer = (state = initialState, action) => {
     return state
 }
 
