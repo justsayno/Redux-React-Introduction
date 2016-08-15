@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
-import { getEmployees } from '../api/employees'
+import { connect } from 'react-redux'
 
 // Components
 import EmployeeList from '../components/EmployeeList'
 import EmployeeListItem from '../components/EmployeeListItem'
 
 class EmployeeDashboard extends Component {
-  constructor(){
-    super()
-    this.state = {
-      employees: getEmployees()
-    }
-  }
   render() {
     return (
       <div className="employee-dashboard col s12 m7">
@@ -25,4 +19,11 @@ class EmployeeDashboard extends Component {
   }
 }
 
-export default EmployeeDashboard
+const mapStateToProps = (state) => ({ 
+    employees: state.employees
+})
+
+const mapDispatchToProps = (dispatch) => ({ 
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDashboard)
