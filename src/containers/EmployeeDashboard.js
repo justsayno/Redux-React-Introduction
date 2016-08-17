@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 // Components
 import EmployeeList from '../components/EmployeeList'
@@ -20,10 +19,4 @@ class EmployeeDashboard extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    employees: state.employees
-  }
-}
-
-export default connect(mapStateToProps)(EmployeeDashboard)
+export default EmployeeDashboard
