@@ -10,7 +10,7 @@ import EmployeeListItem from '../components/EmployeeListItem'
 
 class EmployeeDashboard extends Component {
   render() {
-    const { employees } = this.props
+    let { employees } = this.props
     return (
       <div className="employee-dashboard col s12 m7">
             <EmployeeList>
@@ -24,14 +24,18 @@ class EmployeeDashboard extends Component {
 }
 
 EmployeeDashboard.propTypes = {
-    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired
+    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired,
+    requestEmployees: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({ 
-    employees: state.employees
+const mapStateToProps = (state) => ({
+  employees: state.employees
 })
 
-const mapDispatchToProps = (dispatch) => ({ 
+const mapDispatchToProps = (dispatch) => ({
+  requestEmployees: dispatch({
+    type: 'REQUEST_EMPLOYEES'
+  })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDashboard)

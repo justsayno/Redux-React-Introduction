@@ -19,7 +19,7 @@ const EmployeeListItem = ({employee}) => (
 )
 
 EmployeeListItem.propTypes = { 
-    employee: PropTypes.shape(Employee).isRequired
+    employee: PropTypes.shape(Employee)
 }
 
 export default EmployeeListItem
