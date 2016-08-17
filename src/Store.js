@@ -24,7 +24,6 @@ const initialState = {
 }
 
 export const employeeReducer = (state = initialState, action) => {
-    debugger
     switch (action.type) {
         case REQUEST_EMPLOYEES: {
             return Object.assign({}, state, {
