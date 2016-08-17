@@ -20,10 +20,8 @@ class EmployeeDashboard extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    employees: state.employees
-  }
-}
+const mapStateToProps = (state) => ({
+  employees: state.employees
+})
 
 export default connect(mapStateToProps)(EmployeeDashboard)
