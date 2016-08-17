@@ -8,10 +8,12 @@ class EmployeeProfile extends Component {
     render(){
         // get employee and employee id from props
         const { employees, params: { employeeId } } = this.props
+        
         // filter employees for the one that is selected
         const employee = employees.filter((value) => {
             return value && (value.id === employeeId)
         })[0]
+
         // deconstruct the employee object for easier rendering
         const { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } = employee
         return (
