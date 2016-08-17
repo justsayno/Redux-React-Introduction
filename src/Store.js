@@ -1,4 +1,5 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { getEmployees } from './api/employees'
 
 // Actions
@@ -6,14 +7,24 @@ const REQUEST_EMPLOYEES = 'REQUEST_EMPLOYEES'
 
 // Action Creators
 export const requestEmployees = () => ({ 
-    type: 'REQUEST_EMPLOYEES' 
+    type:  REQUEST_EMPLOYEES
 })
+
+export const requestEmployeesAsync = () => {
+    return (dispatch) => {
+        return setTimeout(() => {
+            // Yay! Can invoke sync or async actions with `dispatch`
+            dispatch(requestEmployees());
+        }, 1000);
+    }
+}
 
 const initialState = {
     employees: []
 }
 
 export const employeeReducer = (state = initialState, action) => {
+    debugger
     switch (action.type) {
         case REQUEST_EMPLOYEES: {
             return Object.assign({}, state, {
@@ -26,4 +37,7 @@ export const employeeReducer = (state = initialState, action) => {
     }
 }
 
-export const Store = createStore(employeeReducer, window.devToolsExtension && window.devToolsExtension())
+export const Store = createStore(
+  employeeReducer,
+  applyMiddleware(thunk)
+);
