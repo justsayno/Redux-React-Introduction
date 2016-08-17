@@ -10,11 +10,20 @@ export const requestEmployees = () => ({
 })
 
 const initialState = {
-    employees: getEmployees()
+    employees: []
 }
 
-const employeeReducer = (state = initialState, action) => {
-    return state
+export const employeeReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case REQUEST_EMPLOYEES: {
+            return Object.assign({}, state, {
+                employees: getEmployees()
+            })
+        }
+        default: {
+            return state
+        }
+    }
 }
 
 export const Store = createStore(employeeReducer, window.devToolsExtension && window.devToolsExtension())
