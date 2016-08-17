@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
+// PropTypes
+import { Employee } from '../constants/PropTypes'
+
 const EmployeeListItem = ({employee}) => (
     <li className="collection-item avatar">
         <img src={employee.avatar} alt={employee.name} className="circle" />
@@ -16,21 +19,7 @@ const EmployeeListItem = ({employee}) => (
 )
 
 EmployeeListItem.propTypes = { 
-    employee: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        avatar: PropTypes.string.isRequired,
-        role: PropTypes.string.isRequired,
-        team: PropTypes.string.isRequired,
-        biography: PropTypes.string.isRequired,
-        keySkills: PropTypes.arrayOf(React.PropTypes.shape({
-            name: PropTypes.string.isRequired
-        })),
-        recentProjects: PropTypes.arrayOf(React.PropTypes.shape({
-            name: PropTypes.string.isRequired
-        }))
-    })
+    employee: PropTypes.shape(Employee)
 }
 
 export default EmployeeListItem
