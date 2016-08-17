@@ -24,12 +24,18 @@ class EmployeeDashboard extends Component {
 }
 
 EmployeeDashboard.propTypes = {
-    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired
+    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired,
+    requestEmployees: PropTypes.func.isRequired
 }
-
 
 const mapStateToProps = (state) => ({
   employees: state.employees
 })
 
-export default connect(mapStateToProps)(EmployeeDashboard)
+const mapDispatchToProps = (dispatch) => ({
+  requestEmployees: dispatch({
+    type: 'REQUEST_EMPLOYEES'
+  })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDashboard)
