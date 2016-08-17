@@ -27,15 +27,22 @@ export const requestEmployeesAsync = () => {
 
 // initial state of the app
 const initialState = {
-    employees: []
+    employees: [],
+    hasLoaded: false
 }
 
 // reducer
 export const employeeReducer = (state = initialState, action) => {
     switch (action.type) {
+        case REQUEST_EMPLOYEES: {
+            return Object.assign({}, state, {
+                hasLoaded: false
+            })
+        }
         case REQUEST_EMPLOYEES_SUCCESS: {
             return Object.assign({}, state, {
-                employees: action.employees
+                employees: action.employees,
+                hasLoaded: true
             })
         }
         default: {

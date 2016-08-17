@@ -7,6 +7,7 @@ import { Employee } from '../constants/PropTypes'
 // Components
 import EmployeeList from '../components/EmployeeList'
 import EmployeeListItem from '../components/EmployeeListItem'
+import Spinner from '../components/Spinner'
 
 // Actions
 import { requestEmployeesAsync } from '../Store'
@@ -17,7 +18,10 @@ class EmployeeDashboard extends Component {
     requestEmployeesAsync()
   }
   render() {
-    let { employees } = this.props
+    let { employees, hasLoaded } = this.props
+    if(!hasLoaded){
+      return <Spinner />
+    }
     return (
       <div className="employee-dashboard col s12 m7">
             <EmployeeList>
@@ -36,7 +40,8 @@ EmployeeDashboard.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  employees: state.employees
+  employees: state.employees,
+  hasLoaded: state.hasLoaded
 })
 
 const mapDispatchToProps = (dispatch) => ({

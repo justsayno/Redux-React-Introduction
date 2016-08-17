@@ -148,7 +148,7 @@ export const getEmployees = () => {
                             name: "Steel and Frame - Rostering system"
                         }],
                 }])
-            }, 2000);
+            }, 3000);
         })
 }
 
