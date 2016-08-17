@@ -25,4 +25,8 @@ class EmployeeDashboard extends Component {
   }
 }
 
+EmployeeDashboard.propTypes = {
+    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired
+}
+
 export default EmployeeDashboard
