@@ -8,7 +8,14 @@ import { Employee } from '../constants/PropTypes'
 import EmployeeList from '../components/EmployeeList'
 import EmployeeListItem from '../components/EmployeeListItem'
 
+// Actions
+import { requestEmployees } from '../Store'
+
 class EmployeeDashboard extends Component {
+  constructor({requestEmployees}){
+    super()
+    requestEmployees()
+  }
   render() {
     let { employees } = this.props
     return (
@@ -33,9 +40,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  requestEmployees: dispatch({
-    type: 'REQUEST_EMPLOYEES'
-  })
+  requestEmployees: () => dispatch(requestEmployees())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDashboard)
