@@ -5,8 +5,14 @@ import EmployeeList from '../components/EmployeeList'
 import EmployeeListItem from '../components/EmployeeListItem'
 
 class EmployeeDashboard extends Component {
+  constructor(){
+    super()
+    this.state = {
+      employees: getEmployees()
+    }
+  }
   render() {
-    let { employees } = this.props
+    let { employees } = this.state
     return (
       <div className="employee-dashboard col s12 m7">
             <EmployeeList>
