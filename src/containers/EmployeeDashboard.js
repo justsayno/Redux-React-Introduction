@@ -40,7 +40,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  requestEmployees: () => dispatch(requestEmployees())
+  requestEmployees: () => dispatch({type: 'REQUEST_EMPLOYEES'})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDashboard)
