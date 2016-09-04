@@ -13,9 +13,9 @@ import Spinner from '../components/Spinner'
 import { requestEmployeesAsync } from '../Store'
 
 class EmployeeDashboard extends Component {
-  constructor({requestEmployeesAsync}){
-    super()
-    requestEmployeesAsync()
+  componentWillMount () {
+    const { requestEmployees } = this.props
+    requestEmployees()
   }
   render() {
     let { employees, hasLoaded } = this.props
