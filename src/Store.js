@@ -17,7 +17,10 @@ export const employeesReceived = (employees) => ({
 })
 
 export const requestEmployees = () => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const { hasLoaded, isFetching } = getState()
+        if( hasLoaded || isFetching ) return
+        
         dispatch(employeesRequested())
         return getEmployees().then(
             (employees) => dispatch(employeesReceived(employees))
