@@ -29,8 +29,8 @@ export const requestEmployees = () => {
         
         dispatch(employeesRequested())
         return getEmployees().then(
-            (employees) => dispatch(employeesReceived(employees),
-            (error) => dispatch(employeesErrorReceived(error)))
+            (employees) => dispatch(employeesReceived(employees)),
+            (error) => dispatch(employeesErrorReceived(error))
         )
     };
 }
