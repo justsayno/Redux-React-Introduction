@@ -4,6 +4,12 @@ import { connect } from 'react-redux'
 // PropTypes
 import { Employee } from '../constants/PropTypes'
 
+// Components
+import Spinner from '../components/Spinner'
+
+// Actions
+import { requestEmployees } from '../store'
+
 class EmployeeProfile extends Component {
     _getSelectedEmployee(props){
         // get employee and employee id from props
@@ -14,7 +20,15 @@ class EmployeeProfile extends Component {
             return value && (value.id === employeeId)
         })[0]
     }
+    componentWillMount () {
+        const { requestEmployees } = this.props
+        requestEmployees()
+    }
     render(){
+        const { hasLoaded } = this.props
+        if(!hasLoaded){
+            return <Spinner />
+        }
         // deconstruct the employee object for easier rendering
         const { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } = this._getSelectedEmployee(this.props)
         return (
@@ -70,7 +84,12 @@ EmployeeProfile.propTypes = {
 }
 
 const mapStateToProps = (state) => ({ 
-    employees: state.employees
+    employees: state.employees,
+    hasLoaded: state.hasLoaded
 })
 
-export default connect(mapStateToProps, null)(EmployeeProfile)
+const mapDispatchToProps = (dispatch) => ({
+  requestEmployees: () => dispatch(requestEmployees())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeProfile)
