@@ -10,7 +10,7 @@ import EmployeeListItem from '../components/EmployeeListItem'
 import Spinner from '../components/Spinner'
 
 // Actions
-import { requestEmployeesAsync } from '../Store'
+import { requestEmployees } from '../store'
 
 class EmployeeDashboard extends Component {
   componentWillMount () {
@@ -36,7 +36,7 @@ class EmployeeDashboard extends Component {
 
 EmployeeDashboard.propTypes = {
     employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired,
-    requestEmployeesAsync: PropTypes.func.isRequired
+    requestEmployees: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  requestEmployeesAsync: () => dispatch(requestEmployeesAsync())
+  requestEmployees: () => dispatch(requestEmployees())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDashboard)
