@@ -8,6 +8,7 @@ import { Employee } from '../constants/PropTypes'
 import EmployeeList from '../components/EmployeeList'
 import EmployeeListItem from '../components/EmployeeListItem'
 import Spinner from '../components/Spinner'
+import Error from '../components/Error'
 
 // Actions
 import { requestEmployees } from '../store'
@@ -18,10 +19,18 @@ class EmployeeDashboard extends Component {
     requestEmployees()
   }
   render() {
-    let { employees, hasLoaded } = this.props
+
+    const { hasLoaded } = this.props
     if(!hasLoaded){
       return <Spinner />
     }
+
+    const { hasError, error } = this.props
+    if(hasError){
+      return <Error error={error} />
+    }
+
+    const { employees } = this.props
     return (
       <div className="employee-dashboard col s12 m7">
             <EmployeeList>
@@ -35,13 +44,18 @@ class EmployeeDashboard extends Component {
 }
 
 EmployeeDashboard.propTypes = {
+    requestEmployees: PropTypes.func.isRequired,
     employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired,
-    requestEmployees: PropTypes.func.isRequired
+    hasLoaded: PropTypes.bool.isRequired,
+    hasError: PropTypes.bool.isRequired,
+    error: PropTypes.object
 }
 
 const mapStateToProps = (state) => ({
-  employees: state.employees,
-  hasLoaded: state.hasLoaded
+    employees: state.employees,
+    hasLoaded: state.hasLoaded,
+    hasError: state.hasError,
+    error: state.error
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -6,6 +6,7 @@ import { Employee } from '../constants/PropTypes'
 
 // Components
 import Spinner from '../components/Spinner'
+import Error from '../components/Error'
 
 // Actions
 import { requestEmployees } from '../store'
@@ -29,6 +30,12 @@ class EmployeeProfile extends Component {
         if(!hasLoaded){
             return <Spinner />
         }
+
+        const { hasError, error } = this.props
+        if(hasError){
+            return <Error error={error} />
+        }
+
         // deconstruct the employee object for easier rendering
         const { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } = this._getSelectedEmployee(this.props)
         return (
@@ -80,12 +87,18 @@ class EmployeeProfile extends Component {
 
 
 EmployeeProfile.propTypes = {
-    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired
+    requestEmployees: PropTypes.func.isRequired,
+    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired,
+    hasLoaded: PropTypes.bool.isRequired,
+    hasError: PropTypes.bool.isRequired,
+    error: PropTypes.object
 }
 
 const mapStateToProps = (state) => ({ 
     employees: state.employees,
-    hasLoaded: state.hasLoaded
+    hasLoaded: state.hasLoaded,
+    hasError: state.hasError,
+    error: state.error
 })
 
 const mapDispatchToProps = (dispatch) => ({

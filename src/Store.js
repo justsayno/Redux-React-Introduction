@@ -17,6 +17,11 @@ export const employeesReceived = (employees) => ({
     employees: employees
 })
 
+export const employeesErrorReceived = (error) => ({
+    type: EMPLOYEES_ERROR_RECEIVED,
+    error: error
+})
+
 export const requestEmployees = () => {
     return (dispatch, getState) => {
         const { hasLoaded, isFetching } = getState()
@@ -24,7 +29,8 @@ export const requestEmployees = () => {
         
         dispatch(employeesRequested())
         return getEmployees().then(
-            (employees) => dispatch(employeesReceived(employees))
+            (employees) => dispatch(employeesReceived(employees),
+            (error) => dispatch(employeesErrorReceived(error)))
         )
     };
 }
