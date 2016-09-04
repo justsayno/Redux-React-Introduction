@@ -12,8 +12,8 @@ import EmployeeListItem from '../components/EmployeeListItem'
 import { requestEmployees } from '../store'
 
 class EmployeeDashboard extends Component {
-  constructor({requestEmployees}){
-    super()
+  componentWillMount () {
+    const { requestEmployees } = this.props
     requestEmployees()
   }
   render() {
