@@ -1,16 +1,22 @@
-import React, { Component } from 'react'
-import { getEmployee } from '../api/employees'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+
+// PropTypes
+import { Employee } from '../constants/PropTypes'
 
 class EmployeeProfile extends Component {
-    constructor({params}){
-        super()
-        const employee = getEmployee(params.employeeId)
-        this.state = {
-            employee: employee
-        }
+    _getSelectedEmployee(props){
+        // get employee and employee id from props
+        const { employees, params: { employeeId } } = props
+        
+        // filter employees for the one that is selected
+        return employees.filter((value) => {
+            return value && (value.id === employeeId)
+        })[0]
     }
     render(){
-        const { employee: { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } } = this.state
+        // deconstruct the employee object for easier rendering
+        const { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } = this._getSelectedEmployee(this.props)
         return (
             <div>
                 <div className="col s12 m4">
@@ -58,4 +64,13 @@ class EmployeeProfile extends Component {
     }
 }
 
-export default EmployeeProfile
+
+EmployeeProfile.propTypes = {
+    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired
+}
+
+const mapStateToProps = (state) => ({ 
+    employees: state.employees
+})
+
+export default connect(mapStateToProps, null)(EmployeeProfile)
