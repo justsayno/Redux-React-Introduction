@@ -9,4 +9,4 @@ const employeeReducer = (state = initialState, action) => {
     return state
 }
 
-export const store = createStore(employeeReducer)
+export const store = createStore(employeeReducer, window.devToolsExtension && window.devToolsExtension())
