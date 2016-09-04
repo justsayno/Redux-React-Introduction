@@ -1,7 +1,7 @@
 # React Introduction
 
 This project is a companion repository for my [Introduction To Redux React Tutorial](https://github.com/justsayno/redux-react-introduction-tutorial) which teaches you
-the core concepts of [Redux](http://redux.js.org/docs/introduction/index.html) and how to build scalable React applications with it. 
+the core concepts of [Redux](http://redux.js.org/docs/introduction/index.html).. 
 
 This is part two in a series that began with my [Introduction To React Tutorial](https://github.com/justsayno/react-introduction-tutorial) showing the basics of using 
 react as a view layer in a web application. 
@@ -23,16 +23,10 @@ cd react-introduction
 npm install
 ```
 
-To run the **static html version**::
+To run the app:
 
 ```
-npm run static
-```
-
-To run the **React Javascript app**:
-
-```
-npm run start
+npm start
 ```
 
 ## Follow the tutorial
