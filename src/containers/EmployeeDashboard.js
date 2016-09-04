@@ -10,7 +10,7 @@ import EmployeeListItem from '../components/EmployeeListItem'
 import Spinner from '../components/Spinner'
 
 // Actions
-import { requestEmployees } from '../store'
+import { requestEmployees, selectEmployees } from '../store'
 
 class EmployeeDashboard extends Component {
   componentWillMount () {
@@ -40,7 +40,7 @@ EmployeeDashboard.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  employees: state.employees,
+  employees: selectEmployees(state),
   hasLoaded: state.hasLoaded
 })
 

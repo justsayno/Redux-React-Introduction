@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { getEmployees } from './api/employees'
+import { createSelector } from 'reselect'
 
 // Actions
 const EMPLOYEES_REQUESTED = 'EMPLOYEES_REQUESTED'
@@ -28,7 +29,8 @@ export const requestEmployees = () => {
 // initial state of the app
 const initialState = {
     employees: [],
-    hasLoaded: false
+    hasLoaded: false,
+    isFetching: false
 }
 
 // reducer
@@ -36,13 +38,15 @@ export const employeeReducer = (state = initialState, action) => {
     switch (action.type) {
         case EMPLOYEES_REQUESTED: {
             return Object.assign({}, state, {
-                hasLoaded: false
+                hasLoaded: false,
+                isFetching: true
             })
         }
         case EMPLOYEES_RECEIVED: {
             return Object.assign({}, state, {
                 employees: action.employees,
-                hasLoaded: true
+                hasLoaded: true,
+                isFetching: false
             })
         }
         default: {
@@ -50,6 +54,9 @@ export const employeeReducer = (state = initialState, action) => {
         }
     }
 }
+
+// selectors
+const selectEmployees = (state) => state.employees
 
 export const store = createStore(
   employeeReducer,
