@@ -44,7 +44,7 @@ export const employeeReducer = (state = initialState, action) => {
     }
 }
 
-export const Store = createStore(
+export const store = createStore(
   employeeReducer,
   initialState,
   compose(

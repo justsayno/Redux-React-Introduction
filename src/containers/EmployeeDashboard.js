@@ -9,7 +9,7 @@ import EmployeeList from '../components/EmployeeList'
 import EmployeeListItem from '../components/EmployeeListItem'
 
 // Actions
-import { requestEmployeesAsync } from '../Store'
+import { requestEmployeesAsync } from '../store'
 
 class EmployeeDashboard extends Component {
   constructor({requestEmployeesAsync}){
