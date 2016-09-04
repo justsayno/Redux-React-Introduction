@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import onClickOutside from 'react-onclickoutside'
+import { Link } from 'react-router'
 
 class MainNavigation extends Component{
     constructor(){
@@ -30,7 +31,7 @@ class MainNavigation extends Component{
             <nav>
                 <div className="nav-wrapper black">
                     <div className="container">
-                        <a href="/" className="brand-logo">Employee CV Manager</a>
+                        <Link to="/" className="brand-logo">Employee CV Manager</Link>
                         <a onClick={() => this.toggleSideNav()} className="button-collapse">
                             <i className="material-icons">menu</i>
                         </a>
