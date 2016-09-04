@@ -1,7 +1,7 @@
 export const getEmployees = () => { 
     return new Promise((resolve, reject) => {
             setTimeout(() => {
-                reject('Sorry something went wrong')
+                reject('Could not load employees')
                 // resolve([{
                 //     id: "2813a9b5-d5d0-4b3a-a7bb-a7f275516b1d",
                 //     firstName: "Gabriella",
