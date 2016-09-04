@@ -5,6 +5,7 @@ import { getEmployees } from './api/employees'
 // Actions
 const EMPLOYEES_REQUESTED = 'EMPLOYEES_REQUESTED'
 const EMPLOYEES_RECEIVED = "EMPLOYEES_RECEIVED"
+const EMPLOYEES_ERROR_RECEIVED = "EMPLOYEES_ERROR_RECEIVED"
 
 // Action Creators
 export const employeesRequested = () => ({
@@ -32,7 +33,9 @@ export const requestEmployees = () => {
 const initialState = {
     employees: [],
     hasLoaded: false,
-    isFetching: false
+    isFetching: false,
+    hasError: false,
+    error: null
 }
 
 // reducer
@@ -40,15 +43,29 @@ export const employeeReducer = (state = initialState, action) => {
     switch (action.type) {
         case EMPLOYEES_REQUESTED: {
             return Object.assign({}, state, {
+                employees: [],
                 hasLoaded: false,
-                isFetching: true
+                isFetching: true,
+                hasError: false,
+                error: null
             })
         }
         case EMPLOYEES_RECEIVED: {
             return Object.assign({}, state, {
                 employees: action.employees,
                 hasLoaded: true,
-                isFetching: false
+                isFetching: false,
+                hasError: false,
+                error: null
+            })
+        }
+        case EMPLOYEES_ERROR_RECEIVED: {
+            return Object.assign({}, state, {
+                employees: [],
+                hasLoaded: true,
+                isFetching: false,
+                hasError: true,
+                error: action.error
             })
         }
         default: {
