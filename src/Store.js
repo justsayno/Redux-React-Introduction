@@ -3,24 +3,24 @@ import thunk from 'redux-thunk';
 import { getEmployees } from './api/employees'
 
 // Actions
-const REQUEST_EMPLOYEES = 'REQUEST_EMPLOYEES'
-const REQUEST_EMPLOYEES_SUCCESS = "REQUEST_EMPLOYEES_SUCCESS"
+const EMPLOYEES_REQUESTED = 'EMPLOYEES_REQUESTED'
+const EMPLOYEES_RECEIVED = "EMPLOYEES_RECEIVED"
 
 // Action Creators
-export const requestEmployees = () => ({
-    type: REQUEST_EMPLOYEES
+export const employeesRequested = () => ({
+    type: EMPLOYEES_REQUESTED
 })
 
-export const requestEmployeesSuccess = (employees) => ({
-    type: REQUEST_EMPLOYEES_SUCCESS,
+export const employeesReceived = (employees) => ({
+    type: EMPLOYEES_RECEIVED,
     employees: employees
 })
 
-export const requestEmployeesAsync = () => {
+export const requestEmployees = () => {
     return (dispatch) => {
-        dispatch(requestEmployees())
+        dispatch(employeesRequested())
         return getEmployees().then(
-            (employees) => dispatch(requestEmployeesSuccess(employees))
+            (employees) => dispatch(employeesReceived(employees))
         )
     };
 }
@@ -33,7 +33,7 @@ const initialState = {
 // reducer
 export const employeeReducer = (state = initialState, action) => {
     switch (action.type) {
-        case REQUEST_EMPLOYEES_SUCCESS: {
+        case EMPLOYEES_RECEIVED: {
             return Object.assign({}, state, {
                 employees: action.employees
             })
