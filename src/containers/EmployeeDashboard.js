@@ -9,11 +9,11 @@ import EmployeeList from '../components/EmployeeList'
 import EmployeeListItem from '../components/EmployeeListItem'
 
 // Actions
-import { requestEmployees } from '../Store'
+import { requestEmployees } from '../store'
 
 class EmployeeDashboard extends Component {
-  constructor({requestEmployees}){
-    super()
+  componentWillMount () {
+    const { requestEmployees } = this.props
     requestEmployees()
   }
   render() {

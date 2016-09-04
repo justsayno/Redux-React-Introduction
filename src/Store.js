@@ -6,7 +6,7 @@ const REQUEST_EMPLOYEES = 'REQUEST_EMPLOYEES'
 
 // Action Creators
 export const requestEmployees = () => ({ 
-    type: 'REQUEST_EMPLOYEES' 
+    type: REQUEST_EMPLOYEES
 })
 
 const initialState = {
@@ -17,4 +17,4 @@ const employeeReducer = (state = initialState, action) => {
     return state
 }
 
-export const Store = createStore(employeeReducer, window.devToolsExtension && window.devToolsExtension())
+export const store = createStore(employeeReducer, window.devToolsExtension && window.devToolsExtension())
