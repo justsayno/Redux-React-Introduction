@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { getEmployees } from './api/employees'
-import { createSelector } from 'reselect'
 
 // Actions
 const EMPLOYEES_REQUESTED = 'EMPLOYEES_REQUESTED'
@@ -54,9 +53,6 @@ export const employeeReducer = (state = initialState, action) => {
         }
     }
 }
-
-// selectors
-const selectEmployees = (state) => state.employees
 
 export const store = createStore(
   employeeReducer,
