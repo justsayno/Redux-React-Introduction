@@ -48,7 +48,7 @@ EmployeeDashboard.propTypes = {
     employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired,
     hasLoaded: PropTypes.bool.isRequired,
     hasError: PropTypes.bool.isRequired,
-    error: PropTypes.object
+    error: PropTypes.string
 }
 
 const mapStateToProps = (state) => ({

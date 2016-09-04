@@ -32,7 +32,7 @@ export const requestEmployees = () => {
             (employees) => dispatch(employeesReceived(employees)),
             (error) => dispatch(employeesErrorReceived(error))
         )
-    };
+    }
 }
 
 // initial state of the app
