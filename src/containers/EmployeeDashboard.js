@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 // PropTypes
-import { Employee } from '../constants/PropTypes'
+import { EmployeeSimlified } from '../constants/PropTypes'
 
 // Components
 import EmployeeList from '../components/EmployeeList'
@@ -45,7 +45,7 @@ class EmployeeDashboard extends Component {
 
 EmployeeDashboard.propTypes = {
     requestEmployees: PropTypes.func.isRequired,
-    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired,
+    employees: PropTypes.arrayOf(PropTypes.shape(EmployeeSimlified)).isRequired,
     hasLoaded: PropTypes.bool.isRequired,
     hasError: PropTypes.bool.isRequired,
     error: PropTypes.string

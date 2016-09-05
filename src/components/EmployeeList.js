@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
 // PropTypes
-import { Employee } from '../constants/PropTypes'
+import { EmployeeSimlified } from '../constants/PropTypes'
 
 const EmployeeList = ({children}) => (
     <div className="employee-list">
@@ -13,7 +13,7 @@ const EmployeeList = ({children}) => (
 )
 
 EmployeeList.PropTypes = {
-    children: PropTypes.arrayOf(PropTypes.shape(Employee))
+    children: PropTypes.arrayOf(PropTypes.shape(EmployeeSimlified))
 }
 
 export default EmployeeList

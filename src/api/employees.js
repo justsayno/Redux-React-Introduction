@@ -1,7 +1,4 @@
-export const getEmployees = () => { 
-    return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve([{
+const employeesAllDataList = [{
                     id: "2813a9b5-d5d0-4b3a-a7bb-a7f275516b1d",
                     firstName: "Gabriella",
                     lastName: "Boon",
@@ -147,15 +144,68 @@ export const getEmployees = () => {
                         }, {
                             name: "Steel and Frame - Rostering system"
                         }],
-                }])
+                }]
+
+const employeesSimplifiedDataList = [{
+                    id: "2813a9b5-d5d0-4b3a-a7bb-a7f275516b1d",
+                    firstName: "Gabriella",
+                    lastName: "Boon",
+                    avatar: "/src/images/gabriella-boon.png",
+                    role: ".NET Developer",
+                    team: "Modern Apps"
+                    }, {
+                        id: "8c5b25d5-64bb-411b-a1af-4fe1394e50a4",
+                        firstName: "Rowanne",
+                        lastName: "Everett",
+                        avatar: "/src/images/rowanne-everett.png",
+                        role: "CRM consultant",
+                        team: "Dynamics"
+                    }, {
+                        id: "1191fdcd-0641-44f5-9380-792b1a92a44b",
+                        firstName: "Heath",
+                        lastName: "Kendrick",
+                        avatar: "/src/images/heath-kendrick.png",
+                        role: "Front-End developer",
+                        team: "Modern Apps"
+                    }, {
+                        id: "af0034a0-19a4-4aed-9c2c-52d9d599d1ac",
+                        firstName: "Kathlyn",
+                        lastName: "Marley",
+                        avatar: "/src/images/kathlyn-marley.png",
+                        role: "UX Designer",
+                        team: "Digital"
+                    }, {
+                        id: "cde5028a-0106-46d2-a616-09f39694c6eb",
+                        firstName: "Pete",
+                        lastName: "Elliot",
+                        avatar: "/src/images/pete-elliot.png",
+                        role: "IOS Developer",
+                        team: "Digital"
+                    }, {
+                        id: "88fe44f8-a01b-4ed0-a0da-793be90b3c25",
+                        firstName: "Andy",
+                        lastName: "Dawson",
+                        avatar: "/src/images/andy-dawson.png",
+                        role: "Senior .NET Developer",
+                        team: "Modern Apps"
+                }]
+
+export const getEmployees = () => { 
+    return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(employeesSimplifiedDataList)
             }, 3000);
         })
 }
 
 export const getEmployee = (employeeId) => {
-    let employee
-    employee = getEmployees().filter((value) => {
-        return value && (value.id === employeeId)
-    })[0]
-    return employee
+    return new Promise((resolve) => {       
+        let employee
+        setTimeout(() => {
+            employee = employeesAllDataList.filter((value) => {
+                return value && (value.id === employeeId)
+            })[0]
+            resolve(employee)
+        }, 3000);     
+    })
 }

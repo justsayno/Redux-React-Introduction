@@ -14,3 +14,12 @@ export const Employee = {
         name: PropTypes.string.isRequired
     }))
 }
+
+export const EmployeeSimlified = {
+    id: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    team: PropTypes.string.isRequired
+}
