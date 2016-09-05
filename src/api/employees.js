@@ -205,7 +205,6 @@ export const getEmployee = (employeeId) => {
             employee = employeesAllDataList.filter((value) => {
                 return value && (value.id === employeeId)
             })[0]
-            debugger
             resolve(employee)
         }, 3000)
     })

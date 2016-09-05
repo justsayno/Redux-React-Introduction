@@ -7,8 +7,13 @@ import App from './App'
 import EmployeeDashboard from './containers/EmployeeDashboard'
 import EmployeeProfile from './containers/EmployeeProfile'
 
-const Routes = () => (
-    <Router history={browserHistory }>
+// sync router with store
+import { store } from './store'
+import { syncHistoryWithStore } from 'react-router-redux'
+const history = syncHistoryWithStore(browserHistory, store)
+
+const Routes = ({history}) => (
+    <Router history={browserHistory}>
         <Route path='/' component={App}>
             <IndexRoute component={EmployeeDashboard} />
             <Route path='/dashboard' component={EmployeeDashboard} />
