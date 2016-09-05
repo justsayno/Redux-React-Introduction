@@ -2,26 +2,35 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 // PropTypes
-import { Employee } from '../constants/PropTypes'
+import { EmployeeSimlified } from '../constants/PropTypes'
 
 // Components
 import EmployeeList from '../components/EmployeeList'
 import EmployeeListItem from '../components/EmployeeListItem'
 import Spinner from '../components/Spinner'
+import Error from '../components/Error'
 
 // Actions
-import { requestEmployeesAsync } from '../Store'
+import { requestEmployees } from '../store'
 
 class EmployeeDashboard extends Component {
-  constructor({requestEmployeesAsync}){
-    super()
-    requestEmployeesAsync()
+  componentWillMount () {
+    const { requestEmployees } = this.props
+    requestEmployees()
   }
   render() {
-    let { employees, hasLoaded } = this.props
+
+    const { hasLoaded } = this.props
     if(!hasLoaded){
       return <Spinner />
     }
+
+    const { hasError, error } = this.props
+    if(hasError){
+      return <Error error={error} />
+    }
+
+    const { employees } = this.props
     return (
       <div className="employee-dashboard col s12 m7">
             <EmployeeList>
@@ -35,17 +44,22 @@ class EmployeeDashboard extends Component {
 }
 
 EmployeeDashboard.propTypes = {
-    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired,
-    requestEmployeesAsync: PropTypes.func.isRequired
+    requestEmployees: PropTypes.func.isRequired,
+    employees: PropTypes.arrayOf(PropTypes.shape(EmployeeSimlified)).isRequired,
+    hasLoaded: PropTypes.bool.isRequired,
+    hasError: PropTypes.bool.isRequired,
+    error: PropTypes.string
 }
 
 const mapStateToProps = (state) => ({
-  employees: state.employees,
-  hasLoaded: state.hasLoaded
+    employees: state.employees.items,
+    hasLoaded: state.employees.hasLoaded,
+    hasError: state.employees.hasError,
+    error: state.employees.error
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  requestEmployeesAsync: () => dispatch(requestEmployeesAsync())
+  requestEmployees: () => dispatch(requestEmployees())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDashboard)

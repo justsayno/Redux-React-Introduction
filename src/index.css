@@ -31,6 +31,14 @@ nav ul li.active a{
     transition: all 1s ease-in-out;
 }
 
+
+/* Error */
+
+.error{
+  width: 30%;
+  margin:auto;
+}
+
 /* Spinner */
 
 .sk-cube-grid {

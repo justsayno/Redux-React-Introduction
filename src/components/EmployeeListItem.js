@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
 // PropTypes
-import { Employee } from '../constants/PropTypes'
+import { EmployeeSimlified } from '../constants/PropTypes'
 
 const EmployeeListItem = ({employee}) => (
     <li className="collection-item avatar">
@@ -19,7 +19,7 @@ const EmployeeListItem = ({employee}) => (
 )
 
 EmployeeListItem.propTypes = { 
-    employee: PropTypes.shape(Employee)
+    employee: PropTypes.shape(EmployeeSimlified)
 }
 
 export default EmployeeListItem
