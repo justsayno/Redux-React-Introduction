@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { getEmployees } from './api/employees'
+import { getEmployees, getEmployee } from './api/employees'
 
 // Actions
 const EMPLOYEES_REQUESTED = 'EMPLOYEES_REQUESTED'
@@ -28,7 +28,8 @@ export const employeesErrorReceived = (error) => ({
 
 export const requestEmployees = () => {
     return (dispatch, getState) => {
-        const { hasLoaded, isFetching } = getState()
+        const state = getState()
+        const { hasLoaded, isFetching } = state.employees
         if( hasLoaded || isFetching ) return
         
         dispatch(employeesRequested())
@@ -40,8 +41,9 @@ export const requestEmployees = () => {
 }
 
 // selected employee action creators
-export const employeeSelected = () => ({
-    type: EMPLOYEE_SELECTED
+export const employeeSelected = (employeeId) => ({
+    type: EMPLOYEE_SELECTED,
+    employeeId: employeeId
 })
 
 export const employeeReceived = (employee) => ({
@@ -54,13 +56,15 @@ export const employeeErrorReceived = (error) => ({
     error: error
 })
 
-export const selectEmployee = () => {
+export const selectEmployee = (employeeId) => {
     return (dispatch, getState) => {
-        const { hasLoaded, isFetching } = getState()
+        debugger
+        const state = getState()
+        const { hasLoaded, isFetching } = state.selectedEmployee
         if( hasLoaded || isFetching ) return
         
-        dispatch(employeeSelected())
-        return getEmployees().then(
+        dispatch(employeeSelected(employeeId))
+        return getEmployee(employeeId).then(
             (employee) => dispatch(employeeReceived(employee)),
             (error) => dispatch(employeeErrorReceived(error))
         )
@@ -174,4 +178,4 @@ export const store = createStore(
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
     )
-);
+)

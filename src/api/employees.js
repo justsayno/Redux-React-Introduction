@@ -194,7 +194,7 @@ export const getEmployees = () => {
     return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(employeesSimplifiedDataList)
-            }, 3000);
+            }, 3000)
         })
 }
 
@@ -205,7 +205,8 @@ export const getEmployee = (employeeId) => {
             employee = employeesAllDataList.filter((value) => {
                 return value && (value.id === employeeId)
             })[0]
+            debugger
             resolve(employee)
-        }, 3000);     
+        }, 3000)
     })
 }

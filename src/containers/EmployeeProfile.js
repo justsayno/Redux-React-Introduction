@@ -9,7 +9,7 @@ import Spinner from '../components/Spinner'
 import Error from '../components/Error'
 
 // Actions
-import { requestEmployees } from '../store'
+import { selectEmployee } from '../store'
 
 class EmployeeProfile extends Component {
     _getSelectedEmployee(props){
@@ -22,8 +22,12 @@ class EmployeeProfile extends Component {
         })[0]
     }
     componentWillMount () {
-        const { requestEmployees } = this.props
-        requestEmployees()
+        const { selectEmployee, params: { employeeId }  } = this.props
+        selectEmployee(employeeId)
+    }
+    componentWillUpdate(){
+        const { selectEmployee, params: { employeeId }  } = this.props
+        selectEmployee(employeeId)
     }
     render(){
         const { hasLoaded } = this.props
@@ -37,7 +41,7 @@ class EmployeeProfile extends Component {
         }
 
         // deconstruct the employee object for easier rendering
-        const { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } = this._getSelectedEmployee(this.props)
+        const { employee: { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } } = this.props
         return (
             <div>
                 <div className="col s12 m4">
@@ -85,24 +89,23 @@ class EmployeeProfile extends Component {
     }
 }
 
-
 EmployeeProfile.propTypes = {
-    requestEmployees: PropTypes.func.isRequired,
-    employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired,
+    selectEmployee: PropTypes.func.isRequired,
+    employee: PropTypes.shape(Employee),
     hasLoaded: PropTypes.bool.isRequired,
     hasError: PropTypes.bool.isRequired,
     error: PropTypes.string
 }
 
 const mapStateToProps = (state) => ({ 
-    employees: state.employees,
-    hasLoaded: state.hasLoaded,
-    hasError: state.hasError,
-    error: state.error
+    employee: state.selectedEmployee.item,
+    hasLoaded: state.selectedEmployee.hasLoaded,
+    hasError: state.selectedEmployee.hasError,
+    error: state.selectedEmployee.error
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  requestEmployees: () => dispatch(requestEmployees())
+  selectEmployee: (employeeId) => dispatch(selectEmployee(employeeId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeProfile)
