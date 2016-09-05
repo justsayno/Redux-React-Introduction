@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { getEmployees } from './api/employees'
 
@@ -7,7 +7,11 @@ const EMPLOYEES_REQUESTED = 'EMPLOYEES_REQUESTED'
 const EMPLOYEES_RECEIVED = "EMPLOYEES_RECEIVED"
 const EMPLOYEES_ERROR_RECEIVED = "EMPLOYEES_ERROR_RECEIVED"
 
-// Action Creators
+const EMPLOYEE_SELECTED = 'EMPLOYEE_SELECTED'
+const EMPLOYEE_RECEIVED = "EMPLOYEE_RECEIVED"
+const EMPLOYEE_ERROR_RECEIVED = "EMPLOYEE_ERROR_RECEIVED"
+
+// employees action creators
 export const employeesRequested = () => ({
     type: EMPLOYEES_REQUESTED
 })
@@ -35,21 +39,49 @@ export const requestEmployees = () => {
     }
 }
 
-// initial state of the app
-const initialState = {
-    employees: [],
+// selected employee action creators
+export const employeeSelected = () => ({
+    type: EMPLOYEE_SELECTED
+})
+
+export const employeeReceived = (employee) => ({
+    type: EMPLOYEE_RECEIVED,
+    employee: employee
+})
+
+export const employeeErrorReceived = (error) => ({
+    type: EMPLOYEE_ERROR_RECEIVED,
+    error: error
+})
+
+export const selectEmployee = () => {
+    return (dispatch, getState) => {
+        const { hasLoaded, isFetching } = getState()
+        if( hasLoaded || isFetching ) return
+        
+        dispatch(employeeSelected())
+        return getEmployees().then(
+            (employee) => dispatch(employeeReceived(employee)),
+            (error) => dispatch(employeeErrorReceived(error))
+        )
+    }
+}
+
+// initial state of the employee reducer
+const employeesInitialState = {
+    items: [],
     hasLoaded: false,
     isFetching: false,
     hasError: false,
     error: null
 }
 
-// reducer
-export const employeeReducer = (state = initialState, action) => {
+// employees reducer
+export const employeeReducer = (state = employeesInitialState, action) => {
     switch (action.type) {
         case EMPLOYEES_REQUESTED: {
             return Object.assign({}, state, {
-                employees: [],
+                items: [],
                 hasLoaded: false,
                 isFetching: true,
                 hasError: false,
@@ -58,7 +90,7 @@ export const employeeReducer = (state = initialState, action) => {
         }
         case EMPLOYEES_RECEIVED: {
             return Object.assign({}, state, {
-                employees: action.employees,
+                items: action.employees,
                 hasLoaded: true,
                 isFetching: false,
                 hasError: false,
@@ -67,7 +99,7 @@ export const employeeReducer = (state = initialState, action) => {
         }
         case EMPLOYEES_ERROR_RECEIVED: {
             return Object.assign({}, state, {
-                employees: [],
+                items: [],
                 hasLoaded: true,
                 isFetching: false,
                 hasError: true,
@@ -80,8 +112,63 @@ export const employeeReducer = (state = initialState, action) => {
     }
 }
 
+// initial state of the selected employee reducer
+const selectedEmployeeInitialState = {
+    item: null,
+    hasLoaded: false,
+    isFetching: false,
+    hasError: false,
+    error: null
+}
+
+// selected employee reducer
+export const selectedEmployeeReducer = (state = selectedEmployeeInitialState, action) => {
+    switch (action.type) {
+        case EMPLOYEE_SELECTED: {
+            return Object.assign({}, state, {
+                item: null,
+                hasLoaded: false,
+                isFetching: true,
+                hasError: false,
+                error: null
+            })
+        }
+        case EMPLOYEE_RECEIVED: {
+            return Object.assign({}, state, {
+                item: action.employee,
+                hasLoaded: true,
+                isFetching: false,
+                hasError: false,
+                error: null
+            })
+        }
+        case EMPLOYEE_ERROR_RECEIVED: {
+            return Object.assign({}, state, {
+                item: null,
+                hasLoaded: true,
+                isFetching: false,
+                hasError: true,
+                error: action.error
+            })
+        }
+        default: {
+            return state
+        }
+    }
+}
+
+const rootReducer = combineReducers({
+    employees: employeeReducer,
+    selectedEmployee: selectedEmployeeReducer
+})
+
+const initialState = {
+    employees: employeesInitialState,
+    selectedEmployee: selectedEmployeeInitialState
+}
+
 export const store = createStore(
-  employeeReducer,
+  rootReducer,
   initialState,
   compose(
     applyMiddleware(thunk),

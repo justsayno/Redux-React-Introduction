@@ -52,10 +52,10 @@ EmployeeDashboard.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    employees: state.employees,
-    hasLoaded: state.hasLoaded,
-    hasError: state.hasError,
-    error: state.error
+    employees: state.employees.items,
+    hasLoaded: state.employees.hasLoaded,
+    hasError: state.employees.hasError,
+    error: state.employees.error
 })
 
 const mapDispatchToProps = (dispatch) => ({
