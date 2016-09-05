@@ -27,7 +27,6 @@ EmployeeDashboard.propTypes = {
     employees: PropTypes.arrayOf(PropTypes.shape(Employee)).isRequired
 }
 
-
 const mapStateToProps = (state) => ({
   employees: state.employees
 })
