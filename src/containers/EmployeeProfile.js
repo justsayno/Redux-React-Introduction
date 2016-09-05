@@ -12,20 +12,7 @@ import Error from '../components/Error'
 import { selectEmployee } from '../store'
 
 class EmployeeProfile extends Component {
-    _getSelectedEmployee(props){
-        // get employee and employee id from props
-        const { employees, params: { employeeId } } = props
-        
-        // filter employees for the one that is selected
-        return employees.filter((value) => {
-            return value && (value.id === employeeId)
-        })[0]
-    }
     componentWillMount () {
-        const { selectEmployee, params: { employeeId }  } = this.props
-        selectEmployee(employeeId)
-    }
-    componentWillUpdate(){
         const { selectEmployee, params: { employeeId }  } = this.props
         selectEmployee(employeeId)
     }
