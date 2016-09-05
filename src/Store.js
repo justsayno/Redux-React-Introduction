@@ -58,7 +58,6 @@ export const employeeErrorReceived = (error) => ({
 
 export const selectEmployee = (employeeId) => {
     return (dispatch, getState) => {
-        debugger
         const state = getState()
         const { hasLoaded, isFetching } = state.selectedEmployee
         if( hasLoaded || isFetching ) return
