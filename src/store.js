@@ -54,12 +54,12 @@ export const employeeErrorReceived = (error) => ({
     error: error
 })
 
-export const requestEmployee = () => {
+export const requestEmployee = (employeeId) => {
     return (dispatch, getState) => {
         const { hasLoaded, isFetching } = getState()
         if( hasLoaded || isFetching ) return
         
-        dispatch(employeeSelected())
+        dispatch(employeeSelected(employeeId))
         return getEmployees().then(
             (employee) => dispatch(employeeReceived(employee)),
             (error) => dispatch(employeeErrorReceived(error))
