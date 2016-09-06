@@ -16,6 +16,10 @@ class EmployeeProfile extends Component {
         const { selectEmployee, params: { employeeId }  } = this.props
         selectEmployee(employeeId)
     }
+    componentWillReceiveProps(newProps){
+        console.log(newProps)
+        debugger
+    }
     render(){
         const { hasLoaded } = this.props
         if(!hasLoaded){
