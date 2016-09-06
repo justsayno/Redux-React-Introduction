@@ -66,7 +66,7 @@ const shouldFetchEmployee = (employeeId, state) => {
     return true
 }
 
-export const selectEmployee = (employeeId) => {
+export const requestEmployee = (employeeId) => {
     return (dispatch, getState) => {
         const state = getState()
         if(!shouldFetchEmployee(employeeId, state)) return

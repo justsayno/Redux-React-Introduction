@@ -9,7 +9,7 @@ import Spinner from '../components/Spinner'
 import Error from '../components/Error'
 
 // Actions
-import { selectEmployee } from '../store'
+import { requestEmployee } from '../store'
 
 class EmployeeProfile extends Component {
     componentWillMount () {
@@ -97,7 +97,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    selectEmployee: (employeeId) => dispatch(selectEmployee(employeeId))
+    selectEmployee: (employeeId) => dispatch(requestEmployee(employeeId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeProfile)

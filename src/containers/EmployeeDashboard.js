@@ -11,7 +11,7 @@ import Spinner from '../components/Spinner'
 import Error from '../components/Error'
 
 // Actions
-import { requestEmployees, selectEmployee } from '../store'
+import { requestEmployees, requestEmployee } from '../store'
 
 class EmployeeDashboard extends Component {
   componentWillMount () {
@@ -35,7 +35,7 @@ class EmployeeDashboard extends Component {
       <div className="employee-dashboard col s12 m7">
             <EmployeeList>
              {employees.map((employee) => {
-                return <EmployeeListItem key={employee.id} employee={employee} selectEmployee={selectEmployee} />
+                return <EmployeeListItem key={employee.id} employee={employee} selectEmployee={requestEmployee} />
               })}
             </EmployeeList>
       </div>
