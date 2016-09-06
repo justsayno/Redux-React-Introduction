@@ -14,7 +14,11 @@ import { selectEmployee } from '../store'
 class EmployeeProfile extends Component {
     componentWillMount () {
         const { selectEmployee, params: { employeeId }  } = this.props
+        // For debugging only
         selectEmployee(employeeId)
+    }
+    componentWillReceiveProps(nextProps){
+        console.log(nextProps)
     }
     render(){
         const { hasLoaded } = this.props
@@ -26,6 +30,8 @@ class EmployeeProfile extends Component {
         if(hasError){
             return <Error error={error} />
         }
+        // For debugging only
+        console.log(`The employeeId is ${this.props.employeeId}`)
 
         // deconstruct the employee object for easier rendering
         const { employee: { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } } = this.props
@@ -78,13 +84,15 @@ class EmployeeProfile extends Component {
 
 EmployeeProfile.propTypes = {
     selectEmployee: PropTypes.func.isRequired,
+    employeeId: PropTypes.string.isRequired,
     employee: PropTypes.shape(Employee),
     hasLoaded: PropTypes.bool.isRequired,
     hasError: PropTypes.bool.isRequired,
     error: PropTypes.string
 }
 
-const mapStateToProps = (state) => ({ 
+const mapStateToProps = (state, ownProps) => ({ 
+    employeeId : ownProps.params.employeeId,
     employee: state.selectedEmployee.item,
     hasLoaded: state.selectedEmployee.hasLoaded,
     hasError: state.selectedEmployee.hasError,
