@@ -14,11 +14,7 @@ import { selectEmployee } from '../store'
 class EmployeeProfile extends Component {
     componentWillMount () {
         const { selectEmployee, params: { employeeId }  } = this.props
-        // For debugging only
         selectEmployee(employeeId)
-    }
-    componentWillReceiveProps(nextProps){
-        console.log(nextProps)
     }
     render(){
         const { hasLoaded } = this.props
@@ -30,6 +26,7 @@ class EmployeeProfile extends Component {
         if(hasError){
             return <Error error={error} />
         }
+
         // For debugging only
         console.log(`The employeeId is ${this.props.employeeId}`)
 
@@ -100,7 +97,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  selectEmployee: (employeeId) => dispatch(selectEmployee(employeeId))
+    selectEmployee: (employeeId) => dispatch(selectEmployee(employeeId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeProfile)

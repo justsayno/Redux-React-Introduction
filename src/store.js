@@ -58,11 +58,18 @@ export const employeeErrorReceived = (error) => ({
     error: error
 })
 
+const shouldFetchEmployee = (employeeId, state) => {
+    const { hasLoaded, isFetching, item: currentEmployee } = state.selectedEmployee
+    if((hasLoaded || isFetching) & (currentEmployee && employeeId === currentEmployee.id)) {
+        return false
+    }
+    return true
+}
+
 export const selectEmployee = (employeeId) => {
     return (dispatch, getState) => {
         const state = getState()
-        const { hasLoaded, isFetching } = state.selectedEmployee
-        if( hasLoaded || isFetching ) return
+        if(!shouldFetchEmployee(employeeId, state)) return
         
         dispatch(employeeSelected(employeeId))
         return getEmployee(employeeId).then(
@@ -71,6 +78,8 @@ export const selectEmployee = (employeeId) => {
         )
     }
 }
+
+
 
 // initial state of the employee reducer
 const employeesInitialState = {
