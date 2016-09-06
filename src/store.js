@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { routerReducer } from 'react-router-redux'
 import { getEmployees, getEmployee } from './api/employees'
 
 // Actions
@@ -173,8 +172,7 @@ export const selectedEmployeeReducer = (state = selectedEmployeeInitialState, ac
 
 const rootReducer = combineReducers({
     employees: employeeReducer,
-    selectedEmployee: selectedEmployeeReducer,
-    routing: routerReducer
+    selectedEmployee: selectedEmployeeReducer
 })
 
 const initialState = {
