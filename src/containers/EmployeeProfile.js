@@ -27,9 +27,6 @@ class EmployeeProfile extends Component {
             return <Error error={error} />
         }
 
-        // For debugging only
-        console.log(`The employeeId is ${this.props.employeeId}`)
-
         // deconstruct the employee object for easier rendering
         const { employee: { firstName, lastName, role, team, biography, avatar, keySkills, recentProjects } } = this.props
         return (

@@ -58,18 +58,11 @@ export const employeeErrorReceived = (error) => ({
     error: error
 })
 
-const shouldFetchEmployee = (employeeId, state) => {
-    const { hasLoaded, isFetching, item: currentEmployee } = state.selectedEmployee
-    if((hasLoaded || isFetching) & (currentEmployee && employeeId === currentEmployee.id)) {
-        return false
-    }
-    return true
-}
-
 export const requestEmployee = (employeeId) => {
     return (dispatch, getState) => {
         const state = getState()
-        if(!shouldFetchEmployee(employeeId, state)) return
+        const { hasLoaded, isFetching } = state.selectedEmployee
+        if(isFetching || (hasLoaded && employeeId === state.selectedEmployee.id)) return
         
         dispatch(employeeSelected(employeeId))
         return getEmployee(employeeId).then(
