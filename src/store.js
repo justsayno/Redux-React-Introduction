@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { getEmployees } from './api/employees'
+import { getEmployees, getEmployee } from './api/employees'
 
 // Actions
 const EMPLOYEES_REQUESTED = 'EMPLOYEES_REQUESTED'
@@ -61,7 +61,7 @@ export const requestEmployee = (employeeId) => {
         if( hasLoaded || isFetching ) return
         
         dispatch(employeeSelected(employeeId))
-        return getEmployees().then(
+        return getEmployee(employeeId).then(
             (employee) => dispatch(employeeReceived(employee)),
             (error) => dispatch(employeeErrorReceived(error))
         )
