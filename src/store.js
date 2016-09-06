@@ -54,7 +54,7 @@ export const employeeErrorReceived = (error) => ({
     error: error
 })
 
-export const selectEmployee = () => {
+export const requestEmployee = () => {
     return (dispatch, getState) => {
         const { hasLoaded, isFetching } = getState()
         if( hasLoaded || isFetching ) return
@@ -174,4 +174,4 @@ export const store = createStore(
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
     )
-);
+)
