@@ -72,8 +72,6 @@ export const requestEmployee = (employeeId) => {
     }
 }
 
-
-
 // initial state of the employee reducer
 const employeesInitialState = {
     items: [],
