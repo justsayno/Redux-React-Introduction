@@ -4,8 +4,6 @@ import { routerReducer } from 'react-router-redux'
 import { getEmployees, getEmployee } from './api/employees'
 
 // Actions
-import { LOCATION_CHANGE } from 'react-router-redux'
-
 const EMPLOYEES_REQUESTED = 'EMPLOYEES_REQUESTED'
 const EMPLOYEES_RECEIVED = "EMPLOYEES_RECEIVED"
 const EMPLOYEES_ERROR_RECEIVED = "EMPLOYEES_ERROR_RECEIVED"
@@ -157,9 +155,6 @@ export const selectedEmployeeReducer = (state = selectedEmployeeInitialState, ac
                 hasError: true,
                 error: action.error
             })
-        }
-        case LOCATION_CHANGE:{
-            return state
         }
         default: {
             return state
