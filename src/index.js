@@ -6,7 +6,7 @@ import Routes from './routes'
 
 ReactDOM.render(
   <Provider store={store}>
-    <Routes store={store}/>
+    <Routes />
   </Provider>,
   document.getElementById('root')
 )
