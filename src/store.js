@@ -40,8 +40,9 @@ export const requestEmployees = () => {
 }
 
 // selected employee action creators
-export const employeeSelected = () => ({
-    type: EMPLOYEE_SELECTED
+export const employeeSelected = (employeeId) => ({
+    type: EMPLOYEE_SELECTED,
+    employeeId: employeeId
 })
 
 export const employeeReceived = (employee) => ({
