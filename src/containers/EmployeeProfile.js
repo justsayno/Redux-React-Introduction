@@ -9,12 +9,12 @@ import Spinner from '../components/Spinner'
 import Error from '../components/Error'
 
 // Actions
-import { selectEmployee } from '../store'
+import { requestEmployee } from '../store'
 
 class EmployeeProfile extends Component {
     componentWillMount () {
-        const { selectEmployee, params: { employeeId }  } = this.props
-        selectEmployee(employeeId)
+        const { requestEmployee, params: { employeeId }  } = this.props
+        requestEmployee(employeeId)
     }
     render(){
         const { hasLoaded } = this.props
@@ -77,7 +77,7 @@ class EmployeeProfile extends Component {
 }
 
 EmployeeProfile.propTypes = {
-    selectEmployee: PropTypes.func.isRequired,
+    requestEmployee: PropTypes.func.isRequired,
     employee: PropTypes.shape(Employee),
     hasLoaded: PropTypes.bool.isRequired,
     hasError: PropTypes.bool.isRequired,
@@ -92,7 +92,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  selectEmployee: (employeeId) => dispatch(selectEmployee(employeeId))
+  requestEmployee: (employeeId) => dispatch(requestEmployee(employeeId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeProfile)
